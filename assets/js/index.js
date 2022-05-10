@@ -32,8 +32,16 @@ const handleSubmit = (event) => {
   const key = target.attr("data-time");
   console.log(key);
 
-  const textAreaBlock = $(`text`);
+  const textAreaBlock = $(`text[data-textarea-key="${timeBlockChoosen}']`)
+    .val()
+    .trim();
+  console.log(textAreaBlock);
 
+  const dayPlanner = readFromLocalStorage("dayPlanner", {});
+
+  dayPlanner[timeBlockChoosen] = textAreaBlock;
+
+  writeToLocalStorage("dayPlanner", dayPlanner);
   // if that is true we want to readfrom local storage
   //declare variable that has value of text area
   //we need to know time related to save button clicked on
@@ -47,9 +55,8 @@ const renderTimeBlocks = () => {
       workingHour.key
     }' class="row time-block ${colour}">
   <div class="col-md-1">${workingHour.time}</div>
-  <textarea class="col-md-10 description" ${getClassName(
-    workingHour.key
-  )} ></textarea>
+  <textarea class="col-md-10 description" data-text-key=
+  ${getLocalStoage(hour.key) || ""}>${getClassName(workingHour.key)} </textarea>
   <button class="saveBtn"  data-time='${workingHour.key}'>Save</button>
 </div>`;
 
