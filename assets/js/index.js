@@ -15,8 +15,25 @@ const currentTime = () => {
   $("#currentDay").text(momentTime);
 };
 
+const getTaskFromLS = (hour) => {
+  const tasks = readFromLocalStorage();
+  // get task by hour from LS
+  const task = tasks[hour];
+  return task;
+};
+
 const handleSubmit = (event) => {
   // add condition that checks if what we have clicked on is a button
+  const target = $(event.target);
+  if (target.is("button")) {
+    console.log("click");
+  }
+
+  const key = target.attr("data-time");
+  console.log(key);
+
+  const textAreaBlock = $(`text`);
+
   // if that is true we want to readfrom local storage
   //declare variable that has value of text area
   //we need to know time related to save button clicked on
@@ -26,9 +43,13 @@ const handleSubmit = (event) => {
 const renderTimeBlocks = () => {
   const renderTimeBlock = (workingHour) => {
     const colour = getClassName(workingHour.key);
-    const timeBlock = `  <div id='${workingHour.key}' class="row time-block ${colour}">
+    const timeBlock = `  <div id='${
+      workingHour.key
+    }' class="row time-block ${colour}">
   <div class="col-md-1">${workingHour.time}</div>
-  <textarea class="col-md-10 description"></textarea>
+  <textarea class="col-md-10 description" ${getClassName(
+    workingHour.key
+  )} ></textarea>
   <button class="saveBtn"  data-time='${workingHour.key}'>Save</button>
 </div>`;
 
