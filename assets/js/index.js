@@ -56,7 +56,7 @@ const renderTimeBlocks = () => {
     }' class="row time-block ${colour}">
   <div class="col-md-1">${workingHour.time}</div>
   <textarea class="col-md-10 description" data-text-key=
-  ${getLocalStoage(hour.key) || ""}>${getClassName(workingHour.key)} </textarea>
+  ${workingHour.key}>${getClassName(workingHour.key)} </textarea>
   <button class="saveBtn"  data-time='${workingHour.key}'>Save</button>
 </div>`;
 
